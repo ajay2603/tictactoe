@@ -404,7 +404,22 @@
 
     function make2(plar) {
 
-      var dl = [];
+      for (var i = 0; i < 3; i++) {
+    var li = [];
+    li.push(matrix[0][i]);
+    li.push(matrix[1][i]);
+    li.push(matrix[2][i]);
+    if (li.count(plar) == 1 && li.count(-1) == 2) {
+      return [li.indexOf(-1), i];
+    }
+  }
+
+  for (var i = 0; i < 3; i++) {
+    if (matrix[i].count(plar) == 1 && matrix[i].count(-1) == 2)
+      return [i, matrix[i].indexOf(-1)];
+  }
+
+  var dl = [];
   dl.push(matrix[0][0]);
   dl.push(matrix[1][1]);
   dl.push(matrix[2][2]);
@@ -438,21 +453,6 @@
     else return [2, 0];
   }
 
-
-  for (var i = 0; i < 3; i++) {
-    if (matrix[i].count(plar) == 1 && matrix[i].count(-1) == 2)
-      return [i, matrix[i].indexOf(-1)];
-  }
-
-  for (var i = 0; i < 3; i++) {
-    var li = [];
-    li.push(matrix[0][i]);
-    li.push(matrix[1][i]);
-    li.push(matrix[2][i]);
-    if (li.count(plar) == 1 && li.count(-1) == 2) {
-      return [li.indexOf(-1), i];
-    }
-  }
 
   return -1;
 }
@@ -552,7 +552,9 @@
 
       }
 
+
   </script>
 </body>
 </html>
+
 
