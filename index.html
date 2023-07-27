@@ -15,6 +15,7 @@
       justify-content: center;
       align-items: center;
       height:fit-content;
+      width:fit-content;
     }
 
     /* Style the Tic Tac Toe board */
@@ -91,10 +92,10 @@
       border-radius: 20px;
       transition: box-shadow 0.3s ease-in-out; /* Added transition effect */
     }
-
   </style>
 </head>
 <body>
+  <center>
   <div class="container">
     <div>
       <center><h1>Tic Tac Toe</h1></center>
@@ -126,6 +127,7 @@
       <button onclick="odd()" class="overlayBt">Player 2 (O)</button>
     </div>
   </div>
+</center>
 
   <script>
 
@@ -401,22 +403,8 @@
     }
 
     function make2(plar) {
-  for (var i = 0; i < 3; i++) {
-    if (matrix[i].count(plar) == 1 && matrix[i].count(-1) == 2)
-      return [i, matrix[i].indexOf(-1)];
-  }
 
-  for (var i = 0; i < 3; i++) {
-    var li = [];
-    li.push(matrix[0][i]);
-    li.push(matrix[1][i]);
-    li.push(matrix[2][i]);
-    if (li.count(plar) == 1 && li.count(-1) == 2) {
-      return [li.indexOf(-1), i];
-    }
-  }
-
-  var dl = [];
+      var dl = [];
   dl.push(matrix[0][0]);
   dl.push(matrix[1][1]);
   dl.push(matrix[2][2]);
@@ -448,6 +436,22 @@
     if (idx == 0) return [0, 2];
     else if (idx == 1) return [1, 1];
     else return [2, 0];
+  }
+
+
+  for (var i = 0; i < 3; i++) {
+    if (matrix[i].count(plar) == 1 && matrix[i].count(-1) == 2)
+      return [i, matrix[i].indexOf(-1)];
+  }
+
+  for (var i = 0; i < 3; i++) {
+    var li = [];
+    li.push(matrix[0][i]);
+    li.push(matrix[1][i]);
+    li.push(matrix[2][i]);
+    if (li.count(plar) == 1 && li.count(-1) == 2) {
+      return [li.indexOf(-1), i];
+    }
   }
 
   return -1;
@@ -548,7 +552,7 @@
 
       }
 
-
   </script>
 </body>
 </html>
+
