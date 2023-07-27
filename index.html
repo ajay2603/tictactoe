@@ -182,7 +182,8 @@
     }
 
     function posWin(plar) {
-  for (var i = 0; i < 3; i++) {
+
+  for (var i = 2; i >=0; i--) {
     if (matrix[i].count(plar) == 2 && matrix[i].count(-1) == 1)
       return [i, matrix[i].indexOf(-1)];
   }
@@ -402,21 +403,20 @@
       
     }
 
-    function make2(plar) {
+    function make2(player) {
+  var matrix = [[1, -1, -1], [-1, 2, 1], [-1, -1, -1]];
 
-      for (var i = 0; i < 3; i++) {
-    var li = [];
-    li.push(matrix[0][i]);
-    li.push(matrix[1][i]);
-    li.push(matrix[2][i]);
-    if (li.count(plar) == 1 && li.count(-1) == 2) {
-      return [li.indexOf(-1), i];
+  var dr = [];
+  dr.push(matrix[2][0]);
+  dr.push(matrix[1][1]);
+  dr.push(matrix[0][2]);
+
+  if (dr.filter(x => x === player).length === 1 && dr.filter(x => x === -1).length === 2) {
+    for (var i = 0; i < 3; i++) {
+      if (matrix[2 - i][i] === -1) {
+        return [2 - i, i]; // Fixed the return statement indices
+      }
     }
-  }
-
-  for (var i = 0; i < 3; i++) {
-    if (matrix[i].count(plar) == 1 && matrix[i].count(-1) == 2)
-      return [i, matrix[i].indexOf(-1)];
   }
 
   var dl = [];
@@ -424,7 +424,7 @@
   dl.push(matrix[1][1]);
   dl.push(matrix[2][2]);
 
-  if (dl.count(plar) == 1 && dl.count(-1) == 2) {
+  if (dl.filter(x => x === player).length === 1 && dl.filter(x => x === -1).length === 2) {
     var idx = -1;
     for (var i = 0; i < 3; i++) {
       if (matrix[i][i] === -1) {
@@ -435,27 +435,27 @@
     return [idx, idx];
   }
 
-  var dr = [];
-  dr.push(matrix[0][2]);
-  dr.push(matrix[1][1]);
-  dr.push(matrix[2][0]);
-
-  if (dr.count(plar) == 1 && dr.count(-1) == 2) {
-    var idx = -1;
-    for (var i = 0; i < 3; i++) {
-      if (matrix[i][2 - i] === -1) {
-        idx = i;
-        break;
-      }
+  for (var i = 0; i < 3; i++) {
+    var li = [];
+    li.push(matrix[0][i]);
+    li.push(matrix[1][i]);
+    li.push(matrix[2][i]);
+    if (li.filter(x => x === player).length === 1 && li.filter(x => x === -1).length === 2) {
+      return [li.indexOf(-1), i];
     }
-    if (idx == 0) return [0, 2];
-    else if (idx == 1) return [1, 1];
-    else return [2, 0];
   }
 
+  for (var i = 0; i < 3; i++) {
+    if (matrix[i].filter(x => x === player).length === 1 && matrix[i].filter(x => x === -1).length === 2) {
+      return [i, matrix[i].indexOf(-1)];
+    }
+  }
 
   return -1;
 }
+
+console.log(make2(2)); // Output: [0, 2]
+
 
     function makeMove(cell) {
       if (completed) return; // Stop moves after the game is completed
@@ -556,5 +556,4 @@
   </script>
 </body>
 </html>
-
 
